@@ -19,16 +19,11 @@ import { GAMES } from "../games";
 import { GambaPlatformProvider } from "gamba-react-ui-v2";
 import { GambaProvider } from "gamba-react-v2";
 import GameToast from "@/hooks/useGameEvent";
-import Header from "@/components/layout/Header";
 import React from "react";
 import { Toaster } from "sonner";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
-import dynamic from "next/dynamic";
 import { useDisclaimer } from "@/hooks/useDisclaimer";
 
-const Sidenav = dynamic(() => import("@/components/layout/SideNav"), {
-  ssr: false,
-});
 function MyApp({ Component, pageProps }: AppProps) {
   const { showDisclaimer, DisclaimerModal } = useDisclaimer();
   const RPC_ENDPOINT =
@@ -49,19 +44,13 @@ function MyApp({ Component, pageProps }: AppProps) {
               defaultCreatorFee={PLATFORM_CREATOR_FEE}
               defaultJackpotFee={PLATFORM_JACKPOT_FEE}
             >
-              <Header />
-              <div className="flex">
-                <Sidenav />
-                <div className="main-content flex-1">
-                  <Component {...pageProps} />
-                </div>
-              </div>
+              <Component {...pageProps} />
               <Footer />
               <Toaster
                 position="bottom-right"
                 richColors
                 toastOptions={{
-                  style: { background: "#020817" },
+                  style: { background: "#15151f" },
                 }}
               />
               {LIVE_EVENT_TOAST && <GameToast />}

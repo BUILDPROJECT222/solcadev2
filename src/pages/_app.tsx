@@ -9,13 +9,9 @@ import {
 import {
   LIVE_EVENT_TOAST,
   PLATFORM_CREATOR_ADDRESS,
-  RPC_ENDPOINT,
-  TOKENS,
+  PLATFORM_CREATOR_FEE,
+  PLATFORM_JACKPOT_FEE,
 } from "../../config";
-import {
-  PhantomWalletAdapter,
-  SolflareWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
 
 import { AppProps } from "next/app";
 import Footer from "@/components/layout/Footer";
@@ -23,41 +19,49 @@ import { GAMES } from "../games";
 import { GambaPlatformProvider } from "gamba-react-ui-v2";
 import { GambaProvider } from "gamba-react-v2";
 import GameToast from "@/hooks/useGameEvent";
+import Header from "@/components/layout/Header";
 import React from "react";
 import { Toaster } from "sonner";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import dynamic from "next/dynamic";
 import { useDisclaimer } from "@/hooks/useDisclaimer";
 
+const Sidenav = dynamic(() => import("@/components/layout/SideNav"), {
+  ssr: false,
+});
 function MyApp({ Component, pageProps }: AppProps) {
-  const wallets = React.useMemo(
-    () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
-    [],
-  );
-
   const { showDisclaimer, DisclaimerModal } = useDisclaimer();
+  const RPC_ENDPOINT =
+    process.env.NEXT_PUBLIC_RPC_ENDPOINT ??
+    "https://api.mainnet-beta.solana.com";
 
   return (
     <ConnectionProvider
       endpoint={RPC_ENDPOINT}
       config={{ commitment: "processed" }}
     >
-      <WalletProvider autoConnect wallets={wallets}>
+      <WalletProvider autoConnect wallets={[]}>
         <WalletModalProvider>
           <GambaProvider>
             <GambaPlatformProvider
               creator={PLATFORM_CREATOR_ADDRESS}
               games={GAMES}
-              tokens={TOKENS}
-              defaultCreatorFee={0.05} // 5%
-              defaultJackpotFee={0.01} // 1%
+              defaultCreatorFee={PLATFORM_CREATOR_FEE}
+              defaultJackpotFee={PLATFORM_JACKPOT_FEE}
             >
-              <Component {...pageProps} />
+              <Header />
+              <div className="flex">
+                <Sidenav />
+                <div className="main-content flex-1">
+                  <Component {...pageProps} />
+                </div>
+              </div>
               <Footer />
               <Toaster
                 position="bottom-right"
                 richColors
                 toastOptions={{
-                  style: { background: "#15151f" },
+                  style: { background: "#020817" },
                 }}
               />
               {LIVE_EVENT_TOAST && <GameToast />}

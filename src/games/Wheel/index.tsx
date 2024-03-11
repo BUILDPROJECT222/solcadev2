@@ -18,7 +18,7 @@ import {
 } from "./game";
 import { GambaUi, useSound, useWagerInput } from "gamba-react-ui-v2";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { drawWheel, radius } from "./wheel";
+import { drawTicker, drawWheel, radius } from "./wheel";
 
 import { gsap } from "gsap";
 import useCustomPlay from "@/hooks/useCustomPlay";
@@ -54,7 +54,7 @@ export default function WheelGame() {
     const app = new PIXI.Application({
       width: 500,
       height: 500,
-      backgroundColor: 0x0c0c11,
+      backgroundColor: 0x151d2a,
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
     });
@@ -64,7 +64,7 @@ export default function WheelGame() {
     wheel.position.set(app.screen.width / 2, app.screen.height / 2);
     app.stage.addChild(wheel as PIXI.DisplayObject);
     drawWheel(wheel, REGULAR_WHEEL_SEGMENTS, REGULAR_SEGMENT_COLORS);
-
+    drawTicker(app, radius);
     if (wheelContainerRef.current) {
       wheelContainerRef.current.appendChild(app.view as unknown as Node);
       if (app.view && app.view.style) {

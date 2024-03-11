@@ -1,8 +1,6 @@
 // config.ts
 
 import {
-  FAKE_TOKEN_MINT,
-  GambaStandardTokens,
   useTokenMeta,
 } from "gamba-react-ui-v2";
 
@@ -32,7 +30,7 @@ export const PLATFORM_EXPLORER_URL = `https://explorer.gamba.so/platform/${PLATF
 // List of tokens supported by this platform
 export const TOKENS: Record<string, TokenMetadata> = {
   // SOL
-  So11111111111111111111111111111111111111112: {
+  "So11111111111111111111111111111111111111112": {
     mint: new PublicKey("So11111111111111111111111111111111111111112"),
     symbol: "SOL",
     name: "Solana",
@@ -42,7 +40,7 @@ export const TOKENS: Record<string, TokenMetadata> = {
     baseWager: 0.01e9,
   },
   // USDC
-  EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v: {
+  "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": {
     mint: new PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"),
     symbol: "USDC",
     name: "USD Coin",
@@ -51,7 +49,8 @@ export const TOKENS: Record<string, TokenMetadata> = {
     decimals: 6,
     baseWager: 1e6,
   },
-  {
+  // SOLCADE
+  "7vuhsRQ2gE4WPv37qegBKu8PcWHxDb5rQ6fQKkDfUghF": {
     mint: new PublicKey("7vuhsRQ2gE4WPv37qegBKu8PcWHxDb5rQ6fQKkDfUghF"),
     symbol: 'SOLCADE',
     name: 'Solana Arcade',
@@ -59,7 +58,8 @@ export const TOKENS: Record<string, TokenMetadata> = {
     decimals: 6,
     baseWager: 10 * 1e6,
   },
-  {
+  // JUP
+  "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN": {
     mint: new PublicKey("JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"),
     symbol: 'JUP',
     name: 'Jupiter',

@@ -54,7 +54,7 @@ export default function WheelGame() {
     const app = new PIXI.Application({
       width: 500,
       height: 500,
-      backgroundColor: 0x151d2a,
+      backgroundColor: 0x0c0c11,
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
     });
@@ -151,7 +151,7 @@ export default function WheelGame() {
           setSpinning(false);
           const winningSegmentValue = segments[result.resultIndex];
 
-          const isWin = winningSegmentValue !== "0X";
+          const isWin = winningSegmentValue !== "";
 
           if (isWin) {
             sounds.play("win");
